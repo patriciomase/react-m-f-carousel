@@ -13,16 +13,21 @@ class TrackInner extends Component {
   }
 
   calculateSlidesWidth() {
-    return this.props.containerWidth;
+    // If we are in mobile phone viewport show 1 slide.
+    if (this.props.containerWidth <= this.props.mobileUntil) {
+      return this.props.containerWidth;
+    }
+    
+    return Math.round(this.props.containerWidth / this.props.show);
   }
 
   makeStyles() {
     console.log({
-      'marginLeft': '-' + (this.props.containerWidth * this.props.currentSlide + this.props.containerWidth * this.props.slides.length) + 'px',
+      'marginLeft': '-' + (this.calculateSlidesWidth() * this.props.currentSlide + this.calculateSlidesWidth() * this.props.slides.length) + 'px',
       'transition': this.props.styles.transition
     });
     return {
-      'marginLeft': '-' + (this.props.containerWidth * this.props.currentSlide + this.props.containerWidth * this.props.slides.length) + 'px',
+      'marginLeft': '-' + (this.calculateSlidesWidth() * this.props.currentSlide + this.calculateSlidesWidth() * this.props.slides.length) + 'px',
       'transition': this.props.styles.transition
     };
   }

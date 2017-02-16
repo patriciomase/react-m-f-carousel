@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 
+// Components.
+import SlideImage from '../SlideImage/SlideImage';
+
 class Slide extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +21,7 @@ class Slide extends Component {
         className="slide"
         style={this.makeStyle()}
       >
-        <img src={this.props.src} />
+        <SlideImage src={this.props.src} />
       </div>
     );
   }
