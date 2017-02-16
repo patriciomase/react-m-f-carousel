@@ -11,7 +11,7 @@ import App from './App.jsx';
 // Configuration object.
 const mfConfig = {
   // How many slides do you want to show?
-  show: 4,
+  show: 3,
 
   // Breakpoints config
   mobileUntil: 480,

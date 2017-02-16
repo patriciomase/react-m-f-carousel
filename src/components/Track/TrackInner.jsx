@@ -10,6 +10,7 @@ class TrackInner extends Component {
     super(props);
     this.calculateSlidesWidth = this.calculateSlidesWidth.bind(this);
     this.renderSlides = this.renderSlides.bind(this);
+    this.whichIsHighlighted = this.whichIsHighlighted.bind(this);
   }
 
   calculateSlidesWidth() {
@@ -17,7 +18,7 @@ class TrackInner extends Component {
     if (this.props.containerWidth <= this.props.mobileUntil) {
       return this.props.containerWidth;
     }
-    
+
     return Math.round(this.props.containerWidth / this.props.show);
   }
 
@@ -41,15 +42,27 @@ class TrackInner extends Component {
     // Triplicate the slides array in order to have slides to the right and left.
     let renderedSlides = realSlides.concat(realSlides, realSlides);
 
+    console.log('highlighted', this.props.currentSlide - 1 + (Math.round(this.props.show / 2)));
+
     return renderedSlides.map((slide, index) => {
       return (
         <Slide 
           {...slide}
+          highlighted={slide.index === this.whichIsHighlighted()}
           key={index}
           width={this.calculateSlidesWidth()}
         />
       );
     });
+  }
+
+  whichIsHighlighted() {
+    // If number of slides is odd, no highlights
+    if (this.props.show % 2 === 0) {
+      return null;
+    }
+    // If even, highlighted is in the middle.
+    return (this.props.currentSlide - 1 + (Math.round(this.props.show / 2))) % this.props.slides.length;
   }
 
   render() {

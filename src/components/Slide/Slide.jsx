@@ -21,7 +21,10 @@ class Slide extends Component {
         className="slide"
         style={this.makeStyle()}
       >
-        <SlideImage src={this.props.src} />
+        <SlideImage
+          highlighted={this.props.highlighted}
+          src={this.props.src} 
+        />
       </div>
     );
   }
