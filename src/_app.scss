@@ -3,6 +3,7 @@ body {
   margin: 0;
 }
 
+@import './components/Controls/controls';
 @import './components/Slide/slide';
 @import './components/Track/track';
 @import './components/Track/trackInner';

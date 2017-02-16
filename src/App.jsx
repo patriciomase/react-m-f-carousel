@@ -1,11 +1,14 @@
 import React, {Component} from 'react';
 
+// Components.
+import Controls from './components/Controls/Controls';
 import Track from './components/Track/Track';
 
 class App extends Component {
   constructor(props) {
     super(props);
 
+    this.actions = this.actions.bind(this);
     this.nextAction = this.nextAction.bind(this);
     this.prevAction = this.prevAction.bind(this);
 
@@ -75,11 +78,12 @@ class App extends Component {
     });
 
   }
-  // actions() {
-  //   return {
-  //     nextAction: this.nextAction
-  //   }
-  // }
+  actions() {
+    return {
+      nextAction: this.nextAction,
+      prevAction: this.prevAction,
+    }
+  }
 
   transitionStyles() {
     if (! this.state.toggleTransition) {
@@ -104,13 +108,7 @@ class App extends Component {
     return (
       <div className="App">
         <Track {...propsBuilt}/>
-        <a onClick={this.prevAction}>
-          Prev
-        </a>
-        ---------
-        <a onClick={this.nextAction}>
-          Next
-        </a>
+        <Controls {...this.actions()}/>
       </div>
     );
   }

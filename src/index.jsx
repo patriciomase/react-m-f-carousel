@@ -8,10 +8,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App.jsx';
 
+function getParameterByName(name, url) {
+    if (!url) {
+      url = window.location.href;
+    }
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
 // Configuration object.
 const mfConfig = {
   // How many slides do you want to show?
-  show: 3,
+  show: getParameterByName('show') || 3,
 
   // Breakpoints config
   mobileUntil: 480,
@@ -35,6 +47,8 @@ const mfConfig = {
     }
   ]
 };
+
+
 
 ReactDOM.render(
   <App {...mfConfig} />,
