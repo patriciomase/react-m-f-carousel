@@ -1,10 +1,9 @@
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
   devtool: 'eval',
   entry: [
-    'webpack-dev-server/client?http://localhost:3000',
+    'webpack-dev-server/client?http://localhost:3999',
     './src/index.jsx'
   ],
   output: {
@@ -21,8 +20,11 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loaders: ["style", "css", "sass"]
+        loaders: ['style', 'css', 'sass']
       }
     ]
+  },
+  resolve: {
+    extensions: ['', '.js', '.jsx']
   }
 }
