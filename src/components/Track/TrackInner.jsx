@@ -42,8 +42,6 @@ class TrackInner extends Component {
     // Triplicate the slides array in order to have slides to the right and left.
     let renderedSlides = realSlides.concat(realSlides, realSlides);
 
-    console.log('highlighted', this.props.currentSlide - 1 + (Math.round(this.props.show / 2)));
-
     return renderedSlides.map((slide, index) => {
       return (
         <Slide 

@@ -31,19 +31,19 @@ const mfConfig = {
   // Image List.
   slides: [
     {
-      src: '//fm.cnbc.com/applications/cnbc.com/resources/img/editorial/2016/01/07/103287518-McLaren-650S-Spider.530x298.jpg?v=1452181967'
+      src: '//www.9thgencivic.com/forum/attachments/other-cars/167153d1394922229-cool-cars-you-encounter-imageuploadedbyautoguide1394922392.684932.jpg'
     },
     {
-      src: '//www.wonderslist.com/wp-content/uploads/2015/04/McLaren-650S.jpg'
+      src: '//lh3.googleusercontent.com/-uitlPI6-dE8/Vi8a7xSWu2I/AAAAAAAAAo0/XH6WvduzxDY/w530-h295-p/lamborghini-aventado-4_800x0w.jpg'
     },
     {
-      src: '//cdn.nowitcounts.com/wp-content/uploads/2016/01/Supercar-Capital.jpg'
+      src: '//4.bp.blogspot.com/-9xOQsi1wtU0/VHtyVcUDdEI/AAAAAAAAAMI/yz-zHBulojY/s1600/Porsche-918-Weissach-video.jpg'
     },
     {
-      src: '//www.freefbpictures.com/wp-content/gallery/supercars-6-2/supercars-in-london.jpg'
+      src: '//www.thetorquereport.com/assets_c/2012/05/2013_Ford_Focus_ST_00008-thumb-530x295-20363.jpg'
     },
     {
-      src: '//images.car.bauercdn.com/upload/9778/images/porschesize.jpg'
+      src: '//www.virtualparking.net/imgdir/869-530.jpg'
     }
   ]
 };

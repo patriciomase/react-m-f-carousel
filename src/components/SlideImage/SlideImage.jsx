@@ -12,7 +12,7 @@ class SlideImage extends Component {
     if (this.props.highlighted) {
       return {
         border: '2px solid yellow',
-        transform: 'scale(1.05)'
+        transform: 'scale(1.07)'
       };
     }
 

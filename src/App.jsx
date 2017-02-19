@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 
 // Components.
 import Controls from './components/Controls/Controls';
+import Main from './components/Main/Main';
 import Track from './components/Track/Track';
 
 class App extends Component {
@@ -107,6 +108,7 @@ class App extends Component {
 
     return (
       <div className="App">
+        <Main {...propsBuilt}/>
         <Track {...propsBuilt}/>
         <Controls {...this.actions()}/>
       </div>
