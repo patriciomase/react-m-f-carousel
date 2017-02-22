@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 
+// Get the parent dimentions as props.
+import Dimensions from 'react-dimensions'
+
 // Components.
 import Controls from './components/Controls/Controls';
 import Main from './components/Main/Main';
@@ -10,20 +13,62 @@ class App extends Component {
     super(props);
 
     this.actions = this.actions.bind(this);
+    this.changeTexts = this.changeTexts.bind(this);
+    this.currentViewPort = this.currentViewPort.bind(this);
     this.nextAction = this.nextAction.bind(this);
     this.prevAction = this.prevAction.bind(this);
-
+    this.responsiveStuff = this.responsiveStuff.bind(this);
     this.transitionStyles = this.transitionStyles.bind(this);
     this.styles = this.styles.bind(this);
 
     this.state = {
       // Start on the first slide.
       currentSlide: 0,
-      toggleTransition: 1
+      
+      // Used to disable the transition temporarly to get the infinite carousel effect.
+      toggleTransition: 1,
+
+      // Used to keep track of the texts status and fire the animation.
+      showingTexts: 1
     };
   }
 
+  actions() {
+    return {
+      nextAction: this.nextAction,
+      prevAction: this.prevAction,
+    }
+  }
+
+  /**
+   * Disable and re-enable showingTexts.
+   * Components will re-render causing the animation.
+   */
+  changeTexts() {
+    this.setState({
+      showingTexts: 0
+    },
+    () => {
+      setTimeout(() => {
+        this.setState({
+          showingTexts: 1
+        });
+      }, 800);
+    });
+
+  }
+
+  currentViewPort() {
+    if (this.props.containerWidth <= this.props.mobileUntil) {
+      return 'mobile';
+    }
+
+    return 'desktop';
+  }
+
   nextAction() {
+
+    this.changeTexts();
     this.setState({
       currentSlide: this.state.currentSlide + 1
     }, 
@@ -52,6 +97,8 @@ class App extends Component {
 
 
   prevAction() {
+
+    this.changeTexts();
     // Move one slide behind.
     this.setState({
       currentSlide: this.state.currentSlide - 1
@@ -77,13 +124,23 @@ class App extends Component {
       // This has to match the transition length
       }, 200);
     });
-
   }
-  actions() {
+
+  responsiveStuff() {
     return {
-      nextAction: this.nextAction,
-      prevAction: this.prevAction,
-    }
+      responsive: {
+        containerWidth: this.props.containerWidth,
+        viewport: this.currentViewPort()
+      }
+    };
+  }
+  
+  styles() {
+    return {
+      styles: {
+        transition: this.transitionStyles()
+      }
+    };
   }
 
   transitionStyles() {
@@ -95,16 +152,13 @@ class App extends Component {
     return 'margin-left 0.2s ease-in-out';
   }
 
-  styles() {
-    return {
-      styles: {
-        transition: this.transitionStyles()
-      }
-    };
-  }
-
   render() {
-    const propsBuilt = Object.assign({}, this.state, this.props, this.styles());
+    const propsBuilt = Object.assign({}, 
+      this.state, 
+      this.props, 
+      this.styles(),
+      this.responsiveStuff()
+    );
 
     return (
       <div className="App">
@@ -115,4 +169,5 @@ class App extends Component {
     );
   }
 }
-export default App;
+
+export default Dimensions()(App)

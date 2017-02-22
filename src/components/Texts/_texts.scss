@@ -1,8 +1,39 @@
 .texts {
   color: #eee;
-  display: inline-block;
-  height: 100%;
-  padding: 30px 0;
+  font-family: sans-serif;
+  padding: 60px 0 30px 0;
   vertical-align: middle;
-  width: 50%;
+  width: 100%;
+
+  &-title {
+    font-size: 30px;
+    font-weight: 600;
+    margin-left: 30px;
+    margin-bottom: 20px;
+    opacity: 0;
+    text-transform: uppercase;
+    transform: translateX(-200%);
+    transition: transform 0.22s ease-in-out, opacity 0.12s linear;
+
+    &.active {
+      opacity: 1;
+      transform: initial;
+    }
+  }
+
+  &-description {
+    margin-left: 30px;
+    opacity: 0;
+    transform: translateX(-200%);
+    transition: transform 0.45s ease-in-out, opacity 0.12s linear;
+
+    &.active {
+      opacity: 1;
+      transform: initial;
+    }
+  }
+
+  &.desktop {
+    width: 40%;
+  }
 }

@@ -9,13 +9,13 @@ class WallSlide extends Component {
   makeStyle() {
     if (this.props.active) {
       return {
-        'background-image': `url('${this.props.src}')`,
+        backgroundImage: `url('${this.props.src}')`,
         opacity: '1'
       };
     }
 
     return {
-      'background-image': `url('${this.props.src}')`,
+      'backgroundImage': `url('${this.props.src}')`,
       opacity: '0'
     }
   }

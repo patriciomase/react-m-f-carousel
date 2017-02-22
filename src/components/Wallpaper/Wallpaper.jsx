@@ -6,8 +6,8 @@ import WallSlide from '../WallSlide/WallSlide';
 class Wallpaper extends Component {
   constructor(props) {
     super(props);
+
     this.renderWallSlides = this.renderWallSlides.bind(this);
-    this.whichIsActive = this.whichIsActive.bind(this);
   }
 
   renderWallSlides() {
@@ -16,26 +16,16 @@ class Wallpaper extends Component {
       return (
         <WallSlide 
           {...slide}
-          active={index === this.whichIsActive()}
+          active={this.props.currentSlide === index}
           key={index}
         />
       );
     });
   }
 
-  whichIsActive() {
-    // If number of slides is odd, no highlights
-    if (this.props.show % 2 === 0) {
-      return this.props.currentSlide;
-    }
-    console.log((this.props.currentSlide - 1 + (Math.round(this.props.show / 2))) % this.props.slides.length);
-    // If even, highlighted is in the middle.
-    return (this.props.currentSlide - 1 + (Math.round(this.props.show / 2))) % this.props.slides.length;
-  }
-
   render() {
     return (
-      <div className="wallpaper">
+      <div className={`wallpaper ${this.props.viewport}`}>
         {this.renderWallSlides()}
       </div>
     );

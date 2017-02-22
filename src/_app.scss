@@ -3,6 +3,11 @@ body {
   margin: 0;
 }
 
+.App {
+  display: flex;
+  flex-direction: column;
+}
+
 @import './components/Controls/controls';
 @import './components/Main/main';
 @import './components/Slide/slide';

@@ -1,32 +1,40 @@
 import React, {Component} from 'react';
 
-// Get the parent dimentions as props.
-import Dimensions from 'react-dimensions'
-
 import Slide from '../Slide/Slide';
 
 class TrackInner extends Component {
   constructor(props) {
     super(props);
+
+    this.calculateOffset = this.calculateOffset.bind(this);
     this.calculateSlidesWidth = this.calculateSlidesWidth.bind(this);
     this.renderSlides = this.renderSlides.bind(this);
     this.whichIsHighlighted = this.whichIsHighlighted.bind(this);
   }
 
-  calculateSlidesWidth() {
-    // If we are in mobile phone viewport show 1 slide.
-    if (this.props.containerWidth <= this.props.mobileUntil) {
-      return this.props.containerWidth;
+  calculateOffset() {
+
+    if (this.props.responsive.viewport === 'mobile') {
+      return 0;
     }
 
-    return Math.round(this.props.containerWidth / this.props.show);
+    if (this.props.show % 2 === 0) {
+      return 0;
+    }
+
+    return Math.floor(this.props.show / 2);
+  }
+
+  calculateSlidesWidth() {
+    // If we are in mobile phone viewport show 1 slide.
+    if (this.props.responsive.viewport === 'mobile') {
+      return this.props.responsive.containerWidth;
+    }
+
+    return Math.round(this.props.responsive.containerWidth / this.props.show);
   }
 
   makeStyles() {
-    console.log({
-      'marginLeft': '-' + (this.calculateSlidesWidth() * this.props.currentSlide + this.calculateSlidesWidth() * this.props.slides.length) + 'px',
-      'transition': this.props.styles.transition
-    });
     return {
       'marginLeft': '-' + (this.calculateSlidesWidth() * this.props.currentSlide + this.calculateSlidesWidth() * this.props.slides.length) + 'px',
       'transition': this.props.styles.transition
@@ -42,6 +50,12 @@ class TrackInner extends Component {
     // Triplicate the slides array in order to have slides to the right and left.
     let renderedSlides = realSlides.concat(realSlides, realSlides);
 
+    // Take care of the offset if we are centering the carousel
+    const offset = this.calculateOffset();
+
+    const removed = renderedSlides.splice(- offset);
+    renderedSlides = removed.concat(renderedSlides);
+
     return renderedSlides.map((slide, index) => {
       return (
         <Slide 
@@ -55,13 +69,13 @@ class TrackInner extends Component {
   }
 
   whichIsHighlighted() {
-    // If number of slides is odd, no highlights
-    if (this.props.show % 2 === 0) {
+    // If we are in mobile view there is no highlight.
+    if (this.props.responsive.viewport === 'mobile') {
       return null;
     }
-    // If even, highlighted is in the middle.
-    return (this.props.currentSlide - 1 + (Math.round(this.props.show / 2))) % this.props.slides.length;
-  }
+    
+    return this.props.currentSlide;
+    }
 
   render() {
     return (
@@ -72,4 +86,4 @@ class TrackInner extends Component {
   }
 }
 
-export default Dimensions()(TrackInner)
+export default TrackInner;

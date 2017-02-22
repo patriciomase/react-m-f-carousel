@@ -12,10 +12,18 @@ class Main extends Component {
   render() {
     return (
       <div
-        className="main"
+        className={`main ${this.props.responsive.viewport}`}
       >
-        <Texts />
-        <Wallpaper {...this.props}/>
+        <Texts 
+          {...this.props.slides[this.props.currentSlide]}
+          showingTexts={this.props.showingTexts}
+          viewport={this.props.responsive.viewport}
+        />
+        <Wallpaper 
+          {...this.props}
+          whichIsActive={this.props.currentSlide}
+          viewport={this.props.responsive.viewport}
+        />
       </div>
     );
   }

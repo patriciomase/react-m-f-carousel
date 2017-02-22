@@ -1,6 +1,10 @@
 .wallpaper {
-  display: inline-block;
-  height: 100%;
+  display: none;
+  height: 400px;
   position: relative;
-  width: 50%;
+  width: 60%;
+
+  &.desktop {
+    display: initial;
+  }
 }

@@ -1,6 +1,12 @@
 .main {
   background: #000;
-  height: 375px;
+  display: flex;
+  //height: 375px;
+  order: 5;
   padding-bottom: 25px;
   position: relative;
+
+  &.desktop {
+    order: 0;
+  }
 }
